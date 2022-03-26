@@ -6,6 +6,7 @@ with open('contacts.csv') as file:
     next(reader)
     for Name, Email in reader:
         with MailMerge('Test.docx') as content_template:
-            print(content_template.get_merge_fields())
+            content_template.merge(Name=Name, Email=Email)
+            content_template.write(f"{Name}.docx")
         
         
