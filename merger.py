@@ -24,6 +24,6 @@ with open('recipients.csv') as file:
 
 time.sleep(5) #Wait for the merging to be processed.
 
-convert("docx_files/") #convert the docx files into pdf and save to the same
+convert("docx_files/", "pdf_files/") #convert the docx files into pdf and save to the same
         
         
