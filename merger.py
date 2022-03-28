@@ -1,6 +1,8 @@
 #Imports
 import csv
 import time
+import os
+from datetime import datetime
 from mailmerge import MailMerge
 from docx2pdf import convert
 
@@ -10,6 +12,7 @@ with open('recipients.csv') as file:
     reader = csv.reader(file)
     next(reader)
 
+    merged_date_time = datetime.now().strftime('%d-%m-%Y %I.%M.%S %p')
     for Name, Employee_ID, Designation, Email_ID in reader:
         '''Main loop that iterates through the rows in the csv. Data from the csv
         is then used in the next section to merge with the docx template'''
@@ -20,7 +23,9 @@ with open('recipients.csv') as file:
             'docx_files' folder.'''
 
             content_template.merge(Name=Name, Employee_ID=Employee_ID, Email_ID=Email_ID)
-            content_template.write(f'E:\Private\Programming\Python\mail-merger\docx_files\{Name}.docx')
+            if not os.path.exists(f"E:/Private/Programming/Python/mail-merger/docx_files/{merged_date_time}"):
+                os.mkdir("E:/Private/Programming/Python/mail-merger/docx_files/" + merged_date_time)
+            content_template.write(f'E:\Private\Programming\Python\mail-merger\docx_files\{merged_date_time}\{Name}.docx')
 
 time.sleep(5) #Wait for the merging to be processed.
 
