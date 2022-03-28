@@ -26,9 +26,11 @@ with open('recipients.csv') as file:
             if not os.path.exists(f"E:/Private/Programming/Python/mail-merger/docx_files/{merged_date_time}"):
                 os.mkdir("E:/Private/Programming/Python/mail-merger/docx_files/" + merged_date_time)
             content_template.write(f'E:\Private\Programming\Python\mail-merger\docx_files\{merged_date_time}\{Name}.docx')
+        
+    convert(f"docx_files/{merged_date_time}", "pdf_files/") #convert the docx files into pdf and save to the same
 
 time.sleep(5) #Wait for the merging to be processed.
 
-convert("docx_files/", "pdf_files/") #convert the docx files into pdf and save to the same
+
         
         
