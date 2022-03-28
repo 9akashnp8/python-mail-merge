@@ -15,7 +15,8 @@ with open('recipients.csv') as file:
     merged_date_time = datetime.now().strftime('%d-%m-%Y %I.%M.%S %p')
     if not os.path.exists(f"E:/Private/Programming/Python/mail-merger/docx_files/{merged_date_time}"):
         os.mkdir("E:/Private/Programming/Python/mail-merger/docx_files/" + merged_date_time)
-        
+        os.mkdir("E:/Private/Programming/Python/mail-merger/pdf_files/" + merged_date_time)
+
     for Name, Employee_ID, Designation, Email_ID in reader:
         '''Main loop that iterates through the rows in the csv. Data from the csv
         is then used in the next section to merge with the docx template'''
@@ -28,7 +29,7 @@ with open('recipients.csv') as file:
             content_template.merge(Name=Name, Employee_ID=Employee_ID, Email_ID=Email_ID)
             content_template.write(f'E:\Private\Programming\Python\mail-merger\docx_files\{merged_date_time}\{Name}.docx')
         
-    convert(f"docx_files/{merged_date_time}", "pdf_files/") #convert the docx files into pdf and save to the same
+    convert(f"docx_files/{merged_date_time}", f"pdf_files/{merged_date_time}") #convert the docx files into pdf and save to the same
 
 
         
