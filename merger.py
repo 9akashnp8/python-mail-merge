@@ -6,17 +6,22 @@ from datetime import datetime
 from mailmerge import MailMerge
 from docx2pdf import convert
 
+print("Mail to Merger started")
+
 with open('recipients.csv') as file:
 
     #Read the csv and skip the header row using next(reader)
+    print("Openinig 'recipients.csv'")
     reader = csv.reader(file)
     next(reader)
-
+    
     merged_date_time = datetime.now().strftime('%d-%m-%Y %I.%M.%S %p')
     if not os.path.exists(f"E:/Private/Programming/Python/mail-merger/docx_files/{merged_date_time}"):
         os.mkdir("E:/Private/Programming/Python/mail-merger/docx_files/" + merged_date_time)
         os.mkdir("E:/Private/Programming/Python/mail-merger/pdf_files/" + merged_date_time)
+        print(f"Creating folder named {merged_date_time} inside docx_files & pdf_files")
 
+    print("Merging csv values to Template_file")
     for Name, Employee_ID, Designation, Email_ID in reader:
         '''Main loop that iterates through the rows in the csv. Data from the csv
         is then used in the next section to merge with the docx template'''
@@ -28,9 +33,10 @@ with open('recipients.csv') as file:
 
             content_template.merge(Name=Name, Employee_ID=Employee_ID, Email_ID=Email_ID)
             content_template.write(f'E:\Private\Programming\Python\mail-merger\docx_files\{merged_date_time}\{Name}.docx')
-        
-    convert(f"docx_files/{merged_date_time}", f"pdf_files/{merged_date_time}") #convert the docx files into pdf and save to the same
 
+    print("Merging Complete > Converting docx to pdfs")    
+    convert(f"docx_files/{merged_date_time}", f"pdf_files/{merged_date_time}") #convert the docx files into pdf and save to the same
+    print("Mail Merge Complete.")
 
         
         
