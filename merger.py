@@ -28,7 +28,7 @@ with open('recipients.csv') as file:
         os.mkdir("E:/Private/Programming/Python/mail-merger/docx_files/" + merged_date_time)
         os.mkdir("E:/Private/Programming/Python/mail-merger/pdf_files/" + merged_date_time)
 
-    for Name, Employee_ID, Designation, Email_ID in reader:
+    for Col1, Col2, Col3, Col4, Col5 in reader:
         '''Main loop that iterates through the rows in the csv. Data from the csv
         is then used in the next section to merge with the docx template'''
 
@@ -39,8 +39,8 @@ with open('recipients.csv') as file:
             the fields with the values fed through the for loop above. Next, it saves the docx to the specified
             'docx_files' folder.'''
 
-            content_template.merge(Name=Name, Employee_ID=Employee_ID, Designation=Designation, Email_ID=Email_ID)
-            content_template.write(f'E:\Private\Programming\Python\mail-merger\docx_files\{merged_date_time}\{Name}.docx')
+            content_template.merge(Col1=Col1, Col2=Col2, Col3=Col3, Col4=Col4)
+            content_template.write(f'E:\Private\Programming\Python\mail-merger\docx_files\{merged_date_time}\{Col1}.docx')
     pbar.close()
     print('\n 2. Converting docx to pdf\n')
     convert(f"docx_files/{merged_date_time}", f"pdf_files/{merged_date_time}") #convert the docx files into pdf and save to the same
